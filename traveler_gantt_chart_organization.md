@@ -1,6 +1,7 @@
 # Traveler Code Organization Report
 
 ## Sequence Diagram
+![Interval Query Sequence Diagram](GanttChartIntervalSequenceDiagram.png)
 
 # Frontend
 
