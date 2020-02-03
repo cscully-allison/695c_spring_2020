@@ -35,6 +35,8 @@
 1. `updateHistogram()` is wrapped in a timeout function of 100ms to provide debounce functionality
 2. URLs for histogram data are defined
 3. [Synchnorous call is made to retrieve data from api URLs using async `await`.](https://github.com/hdc-arizona/traveler-integrated/blob/c7ae37938f2be033ddbc1d7e2ed6ba88e2acf109/static/models/LinkedState.js#L351)
+5. 'datasets/{label}/historgram' endpoint in serve.py calls a calulation function from a particular [interval index object](
+https://github.com/alex-r-bigelow/intervaltree/blob/e2fd3447294b21977c063a28c77bc35ca7785de6/intervaltree/intervaltree.py#L1229)
 4. Broadcasts histogram updated
 
 ### StartIntervalStream (LinkedState.js)
