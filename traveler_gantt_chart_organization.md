@@ -51,7 +51,7 @@
 3. `intervalGenerator()` defines a for loop over all 'intervalIndex' records stored in this applications custom database
 4. [Interval indexes are queried from the database using overloaded "[]" operators and the `iterOverlap()` function.](https://github.com/hdc-arizona/traveler-integrated/blob/5397dc50ec4992a32a489bb6d32753b04c19c1cc/serve.py#L248)
 
-### Database (database.py)
+### Database (data_store/\_\_init\_\_.py)
 1. This call stack continues into the database, defined in database.py (currently being refactored by Alex) through the line:
   + `for i in db[label]['intervalIndexes']['main'].iterOverlap(begin, end):`
 2. This first `[]` evokes an overloaded `__getitem__` which returns a datset associated with a particular label
