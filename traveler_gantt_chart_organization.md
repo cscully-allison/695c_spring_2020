@@ -87,3 +87,4 @@
 ### render/setup() (GanttView.js)
 1. When streaming is finished, we do a full render by calling [`this.render()`](https://github.com/hdc-arizona/traveler-integrated/blob/5397dc50ec4992a32a489bb6d32753b04c19c1cc/static/node_modules/uki/dist/uki.esm.js#L158), an function defined in View class.
 2. This function in turn calls [`this.setup()`](https://github.com/hdc-arizona/traveler-integrated/blob/5397dc50ec4992a32a489bb6d32753b04c19c1cc/static/views/GanttView/GanttView.js#L46), which is defined in GanttView.js
+3. After setup(), render() calls draw(), which calls every drawing function
