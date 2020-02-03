@@ -57,7 +57,7 @@ https://github.com/alex-r-bigelow/intervaltree/blob/e2fd3447294b21977c063a28c77b
 1. This call stack continues into the database, defined in database.py (currently being refactored by Alex) through the line:
   + `for i in db[label]['intervalIndexes']['main'].iterOverlap(begin, end):`
 2. This first `[]` evokes an overloaded `__getitem__` which returns a datset associated with a particular label
-  + The datatype of this dataset was determined when the database was loaded by serve.py when started; at the 'intervalIndex' key it stores a reference to an interval tree stored in a pickle file at the 'main' key
+  + The datatype of this dataset was determined when the database was loaded by serve.py using [`db.load()`](https://github.com/hdc-arizona/traveler-integrated/blob/c80304293e60d380989ae1b4ba9c63416f64875f/data_store/__init__.py#L25) when started; at the 'intervalIndex' key it stores a reference to an interval tree stored in a pickled dictionary at the 'main' key
 
 ### IntervalTree (intervaltree.py)
 1. The IntervalTree object specified in [intervaltree.py](https://github.com/alex-r-bigelow/intervaltree/blob/e2fd3447294b21977c063a28c77bc35ca7785de6/intervaltree/intervaltree.py#L1143) returned by `db[label]['intervalIndexes']['main']` contains the method `iterOverlap()`
