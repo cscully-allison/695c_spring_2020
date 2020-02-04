@@ -35,6 +35,8 @@
 1. `updateHistogram()` is wrapped in a timeout function of 100ms to provide debounce functionality
 2. URLs for histogram data are defined
 3. [Synchnorous call is made to retrieve data from api URLs using async `await`.](https://github.com/hdc-arizona/traveler-integrated/blob/c7ae37938f2be033ddbc1d7e2ed6ba88e2acf109/static/models/LinkedState.js#L351)
+5. 'datasets/{label}/historgram' endpoint in serve.py calls a calulation function from a particular [interval index object](
+https://github.com/alex-r-bigelow/intervaltree/blob/e2fd3447294b21977c063a28c77bc35ca7785de6/intervaltree/intervaltree.py#L1229)
 4. Broadcasts histogram updated
 
 ### StartIntervalStream (LinkedState.js)
@@ -51,11 +53,11 @@
 3. `intervalGenerator()` defines a for loop over all 'intervalIndex' records stored in this applications custom database
 4. [Interval indexes are queried from the database using overloaded "[]" operators and the `iterOverlap()` function.](https://github.com/hdc-arizona/traveler-integrated/blob/5397dc50ec4992a32a489bb6d32753b04c19c1cc/serve.py#L248)
 
-### Database (database.py)
+### Database (data_store/\_\_init\_\_.py)
 1. This call stack continues into the database, defined in database.py (currently being refactored by Alex) through the line:
   + `for i in db[label]['intervalIndexes']['main'].iterOverlap(begin, end):`
 2. This first `[]` evokes an overloaded `__getitem__` which returns a datset associated with a particular label
-  + The datatype of this dataset was determined when the database was loaded by serve.py when started; at the 'intervalIndex' key it stores a reference to an interval tree stored in a pickle file at the 'main' key
+  + The datatype of this dataset was determined when the database was loaded by serve.py using [`db.load()`](https://github.com/hdc-arizona/traveler-integrated/blob/c80304293e60d380989ae1b4ba9c63416f64875f/data_store/__init__.py#L25) when started; at the 'intervalIndex' key it stores a reference to an interval tree stored in a pickled dictionary at the 'main' key
 
 ### IntervalTree (intervaltree.py)
 1. The IntervalTree object specified in [intervaltree.py](https://github.com/alex-r-bigelow/intervaltree/blob/e2fd3447294b21977c063a28c77bc35ca7785de6/intervaltree/intervaltree.py#L1143) returned by `db[label]['intervalIndexes']['main']` contains the method `iterOverlap()`
@@ -87,3 +89,4 @@
 ### render/setup() (GanttView.js)
 1. When streaming is finished, we do a full render by calling [`this.render()`](https://github.com/hdc-arizona/traveler-integrated/blob/5397dc50ec4992a32a489bb6d32753b04c19c1cc/static/node_modules/uki/dist/uki.esm.js#L158), an function defined in View class.
 2. This function in turn calls [`this.setup()`](https://github.com/hdc-arizona/traveler-integrated/blob/5397dc50ec4992a32a489bb6d32753b04c19c1cc/static/views/GanttView/GanttView.js#L46), which is defined in GanttView.js
+3. After setup(), render() calls draw(), which calls every drawing function
